@@ -1,0 +1,87 @@
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.45 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use faculty;
+Database changed
+mysql> desc faculty;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| facno    | char(10) | NO   | PRI | NULL    |       |
+| facname  | char(30) | YES  |     | NULL    |       |
+| gender   | char(1)  | YES  |     | NULL    |       |
+| DOB      | date     | YES  |     | NULL    |       |
+| DOJ      | date     | YES  |     | NULL    |       |
+| Mobileno | bigint   | YES  |     | NULL    |       |
+| depno    | char(10) | YES  |     | NULL    |       |
+| resiged  | char(1)  | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+8 rows in set (0.13 sec)
+
+mysql> insert into faculty values
+    -> ('1298','moham','m','2009-09-12','2020-09-23',7412589630,'mtr','y'),
+    -> ('1098','ash','f','2009-08-23','2008-09-13',9874563210,'mtr','y'),
+    -> ('2345','raju','m','2008-07-12','2026-07-12',3698521470,'mtr','y'),
+    -> ('1234','ramesh','m','2002-09-24','2020-09-23',9874102563,'mtr','y'),
+    -> ('1236','sam','m','2009-09-24','2026-09-25',7200968056,'mng','y');
+Query OK, 5 rows affected (0.05 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select*from faculty;
++-------+---------+--------+------------+------------+------------+-------+---------+
+| facno | facname | gender | DOB        | DOJ        | Mobileno   | depno | resiged |
++-------+---------+--------+------------+------------+------------+-------+---------+
+| 1098  | ash     | f      | 2009-08-23 | 2008-09-13 | 9874563210 | mtr   | y       |
+| 1234  | ramesh  | m      | 2002-09-24 | 2020-09-23 | 9874102563 | mtr   | y       |
+| 1236  | sam     | m      | 2009-09-24 | 2026-09-25 | 7200968056 | mng   | y       |
+| 1298  | moham   | m      | 2009-09-12 | 2020-09-23 | 7412589630 | mtr   | y       |
+| 2345  | raju    | m      | 2008-07-12 | 2026-07-12 | 3698521470 | mtr   | y       |
++-------+---------+--------+------------+------------+------------+-------+---------+
+5 rows in set (0.02 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select*from student;
+ERROR 1146 (42S02): Table 'faculty.student' doesn't exist
+mysql> create table student
+    -> ( regno int primary key,
+    -> name char(10),
+    -> gender char(1),
+    -> city char(10)
+    -> );
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> insert into student values
+    -> ('1234','as','f','chennai'),
+    -> ('2345','ramesh','m','vellore'),
+    -> ('7890','raju','m','trichy'),
+    -> ('3478','sam','m','mumbai'),
+    -> ('9009','lokesh','m','chittoor');
+Query OK, 5 rows affected (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select*from student ;
++-------+--------+--------+----------+
+| regno | name   | gender | city     |
++-------+--------+--------+----------+
+|  1234 | as     | f      | Chennai  |
+|  2345 | Ramesh | m      | Vellore  |
+|  3478 | Sam    | m      | Mumbai   |
+|  7890 | Raju   | m      | Trichy   |
+|  9009 | Lokesh | m      | Chittoor |
++-------+--------+--------+----------+
+5 rows in set (0.02 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
